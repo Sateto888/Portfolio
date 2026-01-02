@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { getNetlifyImageUrl } from '../constants';
 
 const Hero: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const Hero: React.FC = () => {
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src="https://picsum.photos/id/64/1200/1800" 
+          src={getNetlifyImageUrl("https://picsum.photos/id/64/1200/1800", 1200, 80)} 
           className="absolute inset-0 w-full h-full object-cover grayscale brightness-75"
           alt="Featured work"
         />

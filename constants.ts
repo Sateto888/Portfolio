@@ -1,6 +1,13 @@
 
 import { Project, Service } from './types';
 
+// Helper function to convert image URLs to Netlify Image CDN format
+export const getNetlifyImageUrl = (imagePath: string, width: number = 1200, quality: number = 80): string => {
+  // Encode the image path/URL for the Netlify Image CDN
+  const encodedPath = encodeURIComponent(imagePath);
+  return `/.netlify/images?url=${encodedPath}&w=${width}&q=${quality}`;
+};
+
 export const PROJECTS: Project[] = [
   {
     id: '1',

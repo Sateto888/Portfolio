@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GALLERY_SESSIONS } from '../constants';
+import { GALLERY_SESSIONS, getNetlifyImageUrl } from '../constants';
 
 interface Props {
   onBack: () => void;
@@ -106,7 +106,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
                       onClick={() => openImageViewer(currentGlobalIndex)}
                     >
                       <img 
-                        src={src} 
+                        src={getNetlifyImageUrl(src, 1200, 80)} 
                         alt={`${session.title} - Image ${imageIndex + 1}`}
                         loading="lazy"
                         decoding="async"
@@ -148,7 +148,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={allImages[selectedImageIndex]}
+                src={getNetlifyImageUrl(allImages[selectedImageIndex], 1920, 90)}
                 alt={`Image ${selectedImageIndex + 1}`}
                 className="max-w-full max-h-[90vh] object-contain"
               />
