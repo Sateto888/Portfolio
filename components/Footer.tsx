@@ -1,0 +1,58 @@
+import React, { useEffect, useState } from 'react';
+
+interface Props {
+  onNavigate: (id: string) => void;
+}
+
+const Footer: React.FC<Props> = ({ onNavigate }) => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <footer className="bg-[#161719] text-white px-8 md:px-16 pt-24 pb-12" id="contact">
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24">
+        <div className="max-w-2xl">
+          <h2 className="text-5xl md:text-7xl font-display font-bold mb-12 tracking-tighter">
+            HAVE AN IDEA? <br />
+            <span className="text-cyan-500 italic">LET'S COLOR IT.</span>
+          </h2>
+          <a href="mailto:hello@hnseditorial.com" className="text-2xl md:text-4xl border-b-2 border-white/20 pb-2 hover:border-cyan-500 transition-colors duration-500">
+            hello@hnseditorial.com
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-24 gap-y-12 uppercase tracking-widest text-sm font-bold">
+          <div className="space-y-4">
+            <p className="text-gray-500">Navigation</p>
+            <button onClick={() => onNavigate('home')} className="block hover:text-cyan-500 transition-colors text-left uppercase">Home</button>
+            <button onClick={() => onNavigate('portfolio')} className="block hover:text-cyan-500 transition-colors text-left uppercase">Portfolio</button>
+            <button onClick={() => onNavigate('services')} className="block hover:text-cyan-500 transition-colors text-left uppercase">Services</button>
+            <button onClick={() => onNavigate('contact')} className="block hover:text-cyan-500 transition-colors text-left uppercase">Contact</button>
+          </div>
+          <div className="space-y-4">
+            <p className="text-gray-500">Socials</p>
+            <a href="#" className="block hover:text-cyan-500 transition-colors">Instagram</a>
+            <a href="#" className="block hover:text-cyan-500 transition-colors">Behance</a>
+            <a href="#" className="block hover:text-cyan-500 transition-colors">Vimeo</a>
+          </div>
+          <div className="space-y-4">
+            <p className="text-gray-500">Location</p>
+            <p>Dubai, UAE</p>
+            <p className="text-cyan-500 font-normal">{time}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between gap-8 text-xs font-bold uppercase tracking-widest text-gray-500">
+        <p>&copy; 2024 HNS Editorial. All Rights Reserved.</p>
+        <p>Aesthetics, Narrative, Precision.</p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
