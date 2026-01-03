@@ -22,10 +22,10 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
     <div className="border-t border-gray-200">
       <motion.div 
         onClick={handleClick}
-        className="group relative py-12 flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer overflow-hidden"
+        className="group relative py-8 md:py-12 flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer overflow-hidden min-h-[60px] md:min-h-0"
       >
-        <div className="flex items-center gap-8 md:gap-16 z-10">
-          <span className="font-display italic text-6xl md:text-8xl">
+        <div className="flex items-center gap-4 sm:gap-6 md:gap-16 z-10">
+          <span className="font-display italic text-4xl sm:text-5xl md:text-8xl">
             {project.number.split('').map((digit, index) => (
               <span 
                 key={index}
@@ -35,16 +35,16 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
               </span>
             ))}
           </span>
-          <div>
-            <h3 className="text-3xl md:text-5xl font-display font-bold group-hover:translate-x-2 transition-transform duration-500 uppercase tracking-tighter">
+          <div className="flex-1">
+            <h3 className="text-xl sm:text-2xl md:text-5xl font-display font-bold group-hover:translate-x-2 transition-transform duration-500 uppercase tracking-tighter">
               {project.isGalleryLink ? 'GALLERY' : project.title}
             </h3>
-            <p className="text-gray-400 text-sm md:text-base mt-2">{project.category}</p>
+            <p className="text-gray-400 text-xs sm:text-sm md:text-base mt-1 sm:mt-2">{project.category === 'Look Development' ? 'Visual Study' : project.category}</p>
           </div>
         </div>
 
-        <div className="mt-4 md:mt-0 flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 bg-white md:bg-transparent pr-4">
-          <span className="text-lg font-bold uppercase tracking-widest">{project.isGalleryLink ? 'View All' : (isOpen ? 'Close' : 'Explore')}</span>
+        <div className="mt-3 sm:mt-4 md:mt-0 flex items-center gap-3 sm:gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10 bg-white md:bg-transparent pr-2 sm:pr-4 py-2 md:py-0">
+          <span className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest">{project.isGalleryLink ? 'View All' : (isOpen ? 'Close' : 'Explore')}</span>
           <motion.svg 
             animate={{ rotate: isOpen ? 90 : 0 }}
             width="32" height="32" viewBox="0 0 32 32" fill="none" className="fill-current text-cyan-500"
@@ -82,13 +82,13 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
                   transition={{ delay: 0.3 }}
                 >
                   <span className="text-xs font-bold uppercase tracking-widest text-cyan-500 block mb-4">Project Insights</span>
-                  <p className="text-xl md:text-2xl font-display leading-relaxed text-gray-800">
+                  <p className="text-lg md:text-xl font-display leading-relaxed text-gray-800">
                     {project.description}
                   </p>
                   <div className="mt-8 flex flex-col gap-2">
                     <div className="flex justify-between border-b border-gray-200 py-2 text-sm">
-                      <span className="text-gray-400">Client</span>
-                      <span className="font-bold">HNS Productions</span>
+                      <span className="text-gray-400">Production type</span>
+                      <span className="font-bold">{project.title === 'Boxx Club' ? 'Boxx Club' : 'Visual Study'}</span>
                     </div>
                     <div className="flex justify-between border-b border-gray-200 py-2 text-sm">
                       <span className="text-gray-400">Service</span>

@@ -11,15 +11,15 @@ const Hero: React.FC = () => {
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src={getNetlifyImageUrl("https://picsum.photos/id/64/1200/1800", 1200, 80)} 
-          className="absolute inset-0 w-full h-full object-cover grayscale brightness-75"
+          src={getNetlifyImageUrl("/images/hero/HeroProfile.jpg", 1200, 80)} 
+          className="absolute inset-0 w-full h-full object-cover grayscale brightness-75 will-change-transform"
           alt="Featured work"
         />
         <div className="absolute bottom-12 left-8 md:left-16 text-white z-10">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
             className="flex items-center gap-4"
           >
             <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_#06B6D4]" />
@@ -34,8 +34,8 @@ const Hero: React.FC = () => {
           <motion.h1 
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-7xl md:text-9xl font-display font-extrabold leading-[0.9] tracking-tighter"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-5xl sm:text-6xl md:text-9xl font-display font-extrabold leading-[0.9] tracking-tighter will-change-transform"
           >
             EDITORIAL <br />
             & COLOR
@@ -43,11 +43,10 @@ const Hero: React.FC = () => {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="mt-8 text-gray-500 text-lg md:text-xl max-w-md leading-relaxed"
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="mt-6 md:mt-8 text-gray-500 text-base sm:text-lg md:text-xl max-w-md leading-relaxed"
           >
-            Crafting premium visual narratives through the lens of photography, 
-            sophisticated video editing, and expert DaVinci Resolve color grading.
+            Crafting premium visual narratives through a sophisticated creation pipeline from Production, editing to color grading all in one place
           </motion.p>
         </div>
 

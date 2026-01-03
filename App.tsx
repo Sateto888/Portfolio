@@ -6,11 +6,12 @@ import Services from './components/Services';
 import Footer from './components/Footer';
 import Marquee from './components/Marquee';
 import GalleryView from './components/GalleryView';
+import Impressum from './components/Impressum';
 import { PROJECTS } from './constants';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<'main' | 'gallery'>('main');
+  const [view, setView] = useState<'main' | 'gallery' | 'impressum'>('main');
 
   const navigateTo = useCallback((sectionId: string) => {
     if (view !== 'main') {
@@ -39,6 +40,11 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  const openImpressum = () => {
+    setView('impressum');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen bg-[#FCFCFC]">
       <Header onNavigate={navigateTo} />
@@ -56,13 +62,13 @@ const App: React.FC = () => {
                 <Hero />
               </div>
               
-              <section id="portfolio" className="px-8 md:px-16 py-32">
-                <div className="flex justify-between items-center mb-16">
-                  <div className="flex items-center gap-4">
-                    <div className="w-2 h-2 bg-cyan-500 rounded-full" />
-                    <span className="text-[16px] font-bold uppercase tracking-widest text-gray-400">Selected Work</span>
+              <section id="portfolio" className="px-6 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32">
+                <div className="flex justify-between items-center mb-8 sm:mb-12 md:mb-16">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-2 h-2 bg-cyan-500 rounded-full flex-shrink-0" />
+                    <span className="text-sm sm:text-base md:text-[16px] font-bold uppercase tracking-widest text-gray-400">Selected Work</span>
                   </div>
-                  <span className="text-sm font-bold text-gray-300 tracking-widest uppercase">2023 — 2025</span>
+                  <span className="text-xs sm:text-sm font-bold text-gray-300 tracking-widest uppercase">2025</span>
                 </div>
 
                 <div className="mt-12 space-y-0">
@@ -76,16 +82,15 @@ const App: React.FC = () => {
                 </div>
               </section>
 
-              <section className="px-8 md:px-16 py-32 bg-gray-50 border-y border-gray-200">
+              <section className="px-6 sm:px-8 md:px-16 py-16 sm:py-24 md:py-32 bg-gray-50 border-y border-gray-200">
                 <div className="max-w-4xl mx-auto text-center">
                   <motion.h3 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    className="text-3xl md:text-5xl font-display font-medium leading-tight mb-12 tracking-tight"
+                    className="text-2xl md:text-4xl font-display font-medium leading-tight mb-8 sm:mb-10 md:mb-12 tracking-tight"
                   >
-                    "Cinematography isn't just about recording images; it's about <span className="text-cyan-500 italic">manipulating perception</span> with every frame."
+                    "Existence is a series of moments; we <br /><span className="text-cyan-500 italic">curate them into a story</span>."
                   </motion.h3>
-                  <p className="text-sm font-bold uppercase tracking-[0.4em] text-gray-400">— HNS EDITORIAL PHILOSOPHY</p>
                 </div>
               </section>
 
@@ -93,12 +98,14 @@ const App: React.FC = () => {
               <Marquee />
             </main>
           </motion.div>
-        ) : (
+        ) : view === 'gallery' ? (
           <GalleryView key="gallery" onBack={() => navigateTo('portfolio')} />
+        ) : (
+          <Impressum key="impressum" onBack={() => navigateTo('home')} />
         )}
       </AnimatePresence>
 
-      <Footer onNavigate={navigateTo} />
+      <Footer onNavigate={navigateTo} onOpenImpressum={openImpressum} />
     </div>
   );
 };

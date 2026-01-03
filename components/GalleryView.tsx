@@ -8,9 +8,14 @@ interface Props {
 
 const GalleryView: React.FC<Props> = ({ onBack }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   
   // Flatten all images into a single array for navigation
   const allImages = GALLERY_SESSIONS.flatMap(session => session.images);
+  
+  // Minimum swipe distance (in pixels)
+  const minSwipeDistance = 50;
 
   const openImageViewer = (imageIndex: number) => {
     setSelectedImageIndex(imageIndex);
@@ -29,6 +34,30 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
       setSelectedImageIndex(selectedImageIndex > 0 ? selectedImageIndex - 1 : allImages.length - 1);
     } else {
       setSelectedImageIndex(selectedImageIndex < allImages.length - 1 ? selectedImageIndex + 1 : 0);
+    }
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      navigateImage('next');
+    }
+    if (isRightSwipe) {
+      navigateImage('prev');
     }
   };
 
@@ -56,42 +85,42 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-white pt-32 pb-24 px-8 md:px-16"
+      className="min-h-screen bg-white pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24 px-6 sm:px-8 md:px-16"
     >
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-24">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 sm:mb-16 md:mb-24">
         <div>
           <button 
             onClick={onBack}
-            className="flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-cyan-500 transition-colors mb-4 group"
+            className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-cyan-500 transition-colors mb-3 sm:mb-4 group"
           >
             <span className="group-hover:-translate-x-2 transition-transform">←</span> Back to Portfolio
           </button>
-          <h2 className="text-6xl md:text-9xl font-display font-extrabold tracking-tighter leading-none">
+          <h2 className="text-4xl sm:text-5xl md:text-9xl font-display font-extrabold tracking-tighter leading-none">
             PHOTO <br /> ARCHIVE
           </h2>
         </div>
-        <div className="flex flex-col max-w-xl text-gray-600 mt-8 md:mt-0 md:self-center">
-          <div className="text-[26px] leading-[1.1] tracking-[-0.01em]" style={{ marginLeft: '0' }}>
+        <div className="flex flex-col max-w-xl text-gray-600 mt-6 sm:mt-8 md:mt-0 md:self-center">
+          <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] md:ml-0">
             A collection of photos from client work,
           </div>
-          <div className="text-[26px] leading-[1.1] tracking-[-0.01em]" style={{ marginLeft: '1.5rem', marginTop: '0.3rem' }}>
+          <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 md:ml-6">
             street photography and landscapes
           </div>
-          <div className="text-[26px] leading-[1.1] tracking-[-0.01em]" style={{ marginLeft: '3rem', marginTop: '0.3rem' }}>
+          <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 md:ml-12">
             detailing my photographic journey
           </div>
         </div>
       </div>
 
-      <div className="space-y-24">
+      <div className="space-y-12 sm:space-y-16 md:space-y-24">
         {GALLERY_SESSIONS.map((session, sessionIndex) => {
           const sessionStartIndex = globalImageIndex;
           return (
-            <div key={sessionIndex} className="space-y-8">
-              <h3 className="text-2xl md:text-3xl font-display font-bold uppercase tracking-tighter text-gray-900">
+            <div key={sessionIndex} className="space-y-6 sm:space-y-8">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold uppercase tracking-tighter text-gray-900">
                 {session.title}
               </h3>
-              <div className="columns-1 md:columns-2 lg:columns-3 gap-8 [column-fill:balance]">
+              <div className="columns-1 md:columns-2 lg:columns-3 gap-4 sm:gap-6 md:gap-8 [column-fill:balance]">
                 {session.images.map((src, imageIndex) => {
                   const currentGlobalIndex = sessionStartIndex + imageIndex;
                   globalImageIndex++;
@@ -102,7 +131,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: '100px' }}
                       transition={{ delay: Math.min(currentGlobalIndex * 0.02, 0.5) }}
-                      className="relative group overflow-hidden bg-gray-100 break-inside-avoid mb-8 cursor-pointer"
+                      className="relative group overflow-hidden bg-gray-100 break-inside-avoid mb-4 sm:mb-6 md:mb-8 cursor-pointer"
                       onClick={() => openImageViewer(currentGlobalIndex)}
                     >
                       <img 
@@ -123,8 +152,8 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
         })}
       </div>
 
-      <div className="mt-32 text-center">
-        <p className="text-4xl md:text-6xl font-display font-bold tracking-tighter italic">
+      <div className="mt-16 sm:mt-20 md:mt-32 text-center">
+        <p className="text-2xl sm:text-3xl md:text-6xl font-display font-bold tracking-tighter italic">
           Ready to collaborate? <span className="text-cyan-500">Let's talk.</span>
         </p>
       </div>
@@ -146,6 +175,9 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
               transition={{ duration: 0.3 }}
               className="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
             >
               <img
                 src={getNetlifyImageUrl(allImages[selectedImageIndex], 1920, 90)}
@@ -159,7 +191,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
                   e.stopPropagation();
                   navigateImage('prev');
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all group"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all group touch-manipulation"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:-translate-x-1 transition-transform">
                   <path d="M15 18l-6-6 6-6" />
@@ -171,7 +203,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
                   e.stopPropagation();
                   navigateImage('next');
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all group"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all group touch-manipulation"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:translate-x-1 transition-transform">
                   <path d="M9 18l6-6-6-6" />
@@ -181,7 +213,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
               {/* Close Button */}
               <button
                 onClick={closeImageViewer}
-                className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all"
+                className="absolute top-2 sm:top-4 right-2 sm:right-4 w-10 h-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all touch-manipulation"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
@@ -189,7 +221,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
               </button>
 
               {/* Image Counter */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-bold">
+              <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-white text-xs sm:text-sm font-bold">
                 {selectedImageIndex + 1} / {allImages.length}
               </div>
             </motion.div>

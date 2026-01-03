@@ -13,7 +13,7 @@ export const PROJECTS: Project[] = [
     id: '1',
     number: '001',
     title: 'Boxx Club',
-    description: 'Cinematic videography and high-energy editing for the premier nightlife destination. Focus on rhythmic cutting and dynamic lighting captures.',
+    description: "Capturing the pulse of South Korea's nightlife for Boxx Club. This project showcases a comprehensive suite of production services, including cinematography, rhythmic editing, and color correction, designed to drive engagement and brand awareness.",
     category: 'Videography',
     image: '/images/projects/boxx-club.jpg',
     videoUrl: '/videos/boxx-club.mp4'
@@ -22,8 +22,8 @@ export const PROJECTS: Project[] = [
     id: '2',
     number: '002',
     title: 'Zhangjiejie National Park',
-    description: 'Editorial landscape study of the pillar-like peaks. A visual exploration of mist, light, and the immense scale of nature.',
-    category: 'Editorial',
+    description: "Filmed in China's Zhangjiajie National Park, this project explores the concept of 'visual stillness.' The look is defined by a low-contrast grade and soft highlight roll-off, complemented by a slow-paced edit designed to immerse the viewer in a dreamlike look and feel.",
+    category: 'Look Development',
     image: '/images/projects/zhangjiejie.jpg',
     videoUrl: '/videos/zhangjiejie.mp4'
   },
@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
     number: '003',
     title: 'Chengdu City',
     description: 'A deep dive into the urban fabric of Chengdu. Capturing the contrast between ancient traditions and modern metropolitan life.',
-    category: 'Editorial',
+    category: 'Look Development',
     image: '/images/projects/chengdu.jpg',
     videoUrl: '/videos/chengdu.mp4'
   },
@@ -117,12 +117,12 @@ export const GALLERY_IMAGES = GALLERY_SESSIONS.flatMap(session => session.images
 export const SERVICES: Service[] = [
   {
     id: 'photography',
-    title: 'Professional Photography',
+    title: 'Professional Production',
     description: 'High-end captures for fashion, commercial, and editorial needs with an eye for detail and composition.'
   },
   {
     id: 'editing',
-    title: 'Editorial Video Editing',
+    title: 'Video Editing',
     description: 'Narrative-driven post-production for films, documentaries, and commercials, ensuring rhythm and impact.'
   },
   {
