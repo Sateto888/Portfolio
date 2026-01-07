@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../types';
 
@@ -9,6 +9,10 @@ interface Props {
 
 const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [isBuffering, setIsBuffering] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleClick = () => {
     if (project.isGalleryLink) {
@@ -16,6 +20,79 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
     } else {
       setIsOpen(!isOpen);
     }
+  };
+
+  // Reset video loading state when section opens/closes
+  useEffect(() => {
+    if (isOpen && project.videoUrl && videoRef.current) {
+      setIsVideoLoading(true);
+      setVideoError(false);
+      setIsBuffering(false);
+      // Load video when section opens with auto preload
+      videoRef.current.load();
+    } else if (!isOpen && videoRef.current) {
+      setIsVideoLoading(false);
+      setVideoError(false);
+      setIsBuffering(false);
+      // Pause video when section closes
+      videoRef.current.pause();
+    }
+  }, [isOpen, project.videoUrl]);
+
+  // Monitor buffering progress
+  useEffect(() => {
+    if (videoRef.current && isOpen) {
+      const video = videoRef.current;
+      
+      const handleWaiting = () => {
+        setIsBuffering(true);
+      };
+
+      const handlePlaying = () => {
+        setIsBuffering(false);
+      };
+
+      video.addEventListener('waiting', handleWaiting);
+      video.addEventListener('playing', handlePlaying);
+
+      return () => {
+        video.removeEventListener('waiting', handleWaiting);
+        video.removeEventListener('playing', handlePlaying);
+      };
+    }
+  }, [isOpen]);
+
+  // Ensure video loops properly
+  useEffect(() => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      const handleEnded = () => {
+        video.currentTime = 0;
+        video.play();
+      };
+      video.addEventListener('ended', handleEnded);
+      return () => {
+        video.removeEventListener('ended', handleEnded);
+      };
+    }
+  }, [isOpen]);
+
+  const handleVideoLoaded = () => {
+    setIsVideoLoading(false);
+  };
+
+  const handleVideoCanPlay = () => {
+    setIsVideoLoading(false);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay might fail, that's okay
+      });
+    }
+  };
+
+  const handleVideoError = () => {
+    setIsVideoLoading(false);
+    setVideoError(true);
   };
 
   return (
@@ -65,15 +142,74 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
             className="overflow-hidden bg-gray-50"
           >
             <div className="px-8 md:px-16 py-12 flex flex-col lg:flex-row gap-12 items-center">
-              <div className="w-full lg:w-2/3 aspect-video bg-black overflow-hidden rounded-sm shadow-2xl">
-                <video 
-                  src={project.videoUrl} 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-full lg:w-2/3 aspect-video bg-black overflow-hidden rounded-sm shadow-2xl relative">
+                <style>{`
+                  video::-webkit-media-controls-timeline {
+                    display: none !important;
+                  }
+                  video::-webkit-media-controls-current-time-display {
+                    display: none !important;
+                  }
+                  video::-webkit-media-controls-time-remaining-display {
+                    display: none !important;
+                  }
+                `}</style>
+                {project.videoUrl ? (
+                  <>
+                    {/* Loading indicator */}
+                    {isVideoLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-20">
+                        <div className="flex flex-col items-center gap-4">
+                          <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+                          <p className="text-gray-400 text-sm">Loading video...</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Buffering indicator */}
+                    {isBuffering && !isVideoLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+                          <p className="text-gray-300 text-xs">Buffering...</p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Error state */}
+                    {videoError && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                        <div className="text-center text-gray-400">
+                          <p className="text-sm mb-2">Video unavailable</p>
+                          <p className="text-xs">Please check the file path</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Video element */}
+                    <video 
+                      ref={videoRef}
+                      src={project.videoUrl} 
+                      autoPlay 
+                      loop 
+                      playsInline
+                      controls
+                      preload="auto"
+                      onLoadedData={handleVideoLoaded}
+                      onCanPlay={handleVideoCanPlay}
+                      onCanPlayThrough={() => {
+                        setIsVideoLoading(false);
+                        setIsBuffering(false);
+                      }}
+                      onError={handleVideoError}
+                      className={`w-full h-full object-cover ${isVideoLoading || videoError ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                    />
+                  </>
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                    <p className="text-gray-400 text-sm">No video available</p>
+                  </div>
+                )}
               </div>
               <div className="w-full lg:w-1/3">
                 <motion.div
