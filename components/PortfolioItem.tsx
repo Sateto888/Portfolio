@@ -5,10 +5,11 @@ import { Project } from '../types';
 interface Props {
   project: Project;
   onGalleryClick: () => void;
+  isOpen: boolean;
+  onToggle: (projectId: string) => void;
 }
 
-const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onToggle }) => {
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const [isBuffering, setIsBuffering] = useState(false);
   const [videoError, setVideoError] = useState(false);
@@ -18,7 +19,31 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
     if (project.isGalleryLink) {
       onGalleryClick();
     } else {
-      setIsOpen(!isOpen);
+      onToggle(project.id);
+    }
+  };
+
+  // Exit fullscreen helper function
+  const exitFullscreen = async () => {
+    try {
+      if (
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement
+      ) {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen();
+        } else if ((document as any).mozCancelFullScreen) {
+          await (document as any).mozCancelFullScreen();
+        } else if ((document as any).msExitFullscreen) {
+          await (document as any).msExitFullscreen();
+        }
+      }
+    } catch (error) {
+      console.log('Exit fullscreen failed:', error);
     }
   };
 
@@ -34,8 +59,21 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
       setIsVideoLoading(false);
       setVideoError(false);
       setIsBuffering(false);
-      // Pause video when section closes
+      // Pause video and reset to beginning when section closes
       videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      
+      // Exit fullscreen if video was in fullscreen mode
+      if (
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement
+      ) {
+        exitFullscreen().catch(() => {
+          // Error already handled in exitFullscreen
+        });
+      }
     }
   }, [isOpen, project.videoUrl]);
 
@@ -77,6 +115,91 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
     }
   }, [isOpen]);
 
+  // Toggle fullscreen function
+  const toggleFullscreen = async () => {
+    if (!videoRef.current) return;
+
+    const video = videoRef.current;
+    
+    try {
+      // Check if already in fullscreen
+      if (
+        document.fullscreenElement ||
+        (document as any).webkitFullscreenElement ||
+        (document as any).mozFullScreenElement ||
+        (document as any).msFullscreenElement
+      ) {
+        // Exit fullscreen
+        await exitFullscreen();
+      } else {
+        // Enter fullscreen
+        if (video.requestFullscreen) {
+          await video.requestFullscreen();
+        } else if ((video as any).webkitRequestFullscreen) {
+          await (video as any).webkitRequestFullscreen();
+        } else if ((video as any).mozRequestFullScreen) {
+          await (video as any).mozRequestFullScreen();
+        } else if ((video as any).msRequestFullscreen) {
+          await (video as any).msRequestFullscreen();
+        }
+      }
+    } catch (error) {
+      // Fullscreen API might fail (e.g., user denies permission)
+      console.log('Fullscreen operation failed:', error);
+    }
+  };
+
+  // Keyboard shortcuts for fullscreen and download prevention
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle keys when video section is open and video exists
+      if (!isOpen || !project.videoUrl) return;
+
+      // Handle F key for fullscreen toggle
+      if (e.key === 'f' || e.key === 'F') {
+        // Don't trigger if user is typing in an input field
+        if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+          return;
+        }
+        e.preventDefault();
+        toggleFullscreen().catch(() => {
+          // Error already handled in toggleFullscreen
+        });
+        return;
+      }
+
+      // Handle Esc key to exit fullscreen
+      if (e.key === 'Escape') {
+        // Check if we're in fullscreen mode before preventing default
+        if (
+          document.fullscreenElement ||
+          (document as any).webkitFullscreenElement ||
+          (document as any).mozFullScreenElement ||
+          (document as any).msFullscreenElement
+        ) {
+          e.preventDefault();
+          exitFullscreen().catch(() => {
+            // Error already handled in exitFullscreen
+          });
+          return;
+        }
+      }
+
+      // Prevent Ctrl+S, Ctrl+Shift+S, Ctrl+U
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    if (isOpen && project.videoUrl) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isOpen, project.videoUrl]);
+
   const handleVideoLoaded = () => {
     setIsVideoLoading(false);
   };
@@ -93,6 +216,18 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
   const handleVideoError = () => {
     setIsVideoLoading(false);
     setVideoError(true);
+  };
+
+  // Prevent right-click context menu on video
+  const handleContextMenu = (e: React.MouseEvent<HTMLVideoElement>) => {
+    e.preventDefault();
+    return false;
+  };
+
+  // Prevent drag and drop
+  const handleDragStart = (e: React.DragEvent<HTMLVideoElement>) => {
+    e.preventDefault();
+    return false;
   };
 
   return (
@@ -153,6 +288,9 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
                   video::-webkit-media-controls-time-remaining-display {
                     display: none !important;
                   }
+                  video::-webkit-media-controls-download-button {
+                    display: none !important;
+                  }
                 `}</style>
                 {project.videoUrl ? (
                   <>
@@ -194,6 +332,7 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
                       loop 
                       playsInline
                       controls
+                      controlsList="nodownload noremoteplayback"
                       preload="auto"
                       onLoadedData={handleVideoLoaded}
                       onCanPlay={handleVideoCanPlay}
@@ -202,6 +341,9 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick }) => {
                         setIsBuffering(false);
                       }}
                       onError={handleVideoError}
+                      onContextMenu={handleContextMenu}
+                      onDragStart={handleDragStart}
+                      draggable={false}
                       className={`w-full h-full object-cover ${isVideoLoading || videoError ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
                     />
                   </>

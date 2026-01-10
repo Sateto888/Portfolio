@@ -34,7 +34,7 @@ export const PROJECTS: Project[] = [
     description: 'A deep dive into the urban fabric of Chengdu. Capturing the contrast between ancient traditions and modern metropolitan life.',
     category: 'Look Development',
     image: '/images/projects/chengdu.jpg',
-    videoUrl: '/videos/chengdu.mp4'
+    videoUrl: '/videos/chengdu travel.mp4'
   },
   {
     id: '4',

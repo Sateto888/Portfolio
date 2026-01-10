@@ -12,6 +12,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
   const [view, setView] = useState<'main' | 'gallery' | 'impressum'>('main');
+  const [openProjectId, setOpenProjectId] = useState<string | null>(null);
+
+  const handleProjectToggle = useCallback((projectId: string) => {
+    setOpenProjectId(prevId => prevId === projectId ? null : projectId);
+  }, []);
 
   const navigateTo = useCallback((sectionId: string) => {
     if (view !== 'main') {
@@ -77,6 +82,8 @@ const App: React.FC = () => {
                       key={project.id} 
                       project={project} 
                       onGalleryClick={openGallery}
+                      isOpen={openProjectId === project.id}
+                      onToggle={handleProjectToggle}
                     />
                   ))}
                 </div>
