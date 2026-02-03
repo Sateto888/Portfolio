@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GALLERY_SESSIONS, getNetlifyImageUrl } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface Props {
   onBack: () => void;
 }
 
 const GalleryView: React.FC<Props> = ({ onBack }) => {
+  const { t } = useLanguage();
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -93,21 +95,21 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
             onClick={onBack}
             className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-cyan-500 transition-colors mb-3 sm:mb-4 group"
           >
-            <span className="group-hover:-translate-x-2 transition-transform">←</span> Back to Portfolio
+            <span className="group-hover:-translate-x-2 transition-transform">←</span> {t.galleryView.backToPortfolio}
           </button>
           <h2 className="text-4xl sm:text-5xl md:text-9xl font-display font-extrabold tracking-tighter leading-none">
-            PHOTO <br /> ARCHIVE
+            {t.galleryView.photoArchive.split(' ')[0]} <br /> {t.galleryView.photoArchive.split(' ')[1]}
           </h2>
         </div>
         <div className="flex flex-col max-w-xl text-gray-600 mt-6 sm:mt-8 md:mt-0 md:self-center">
           <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] md:ml-0">
-            A collection of photos from client work,
+            {t.galleryView.descriptionLine1}
           </div>
           <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 md:ml-6">
-            street photography and landscapes
+            {t.galleryView.descriptionLine2}
           </div>
           <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 md:ml-12">
-            detailing my photographic journey
+            {t.galleryView.descriptionLine3}
           </div>
         </div>
       </div>
@@ -154,7 +156,7 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
 
       <div className="mt-16 sm:mt-20 md:mt-32 text-center">
         <p className="text-2xl sm:text-3xl md:text-6xl font-display font-bold tracking-tighter italic">
-          Ready to collaborate? <span className="text-cyan-500">Let's talk.</span>
+          {t.galleryView.readyToCollaborate} <span className="text-cyan-500">{t.galleryView.letsTalk}</span>
         </p>
       </div>
 

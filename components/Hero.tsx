@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { getNetlifyImageUrl } from '../constants';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section className="relative h-screen w-full flex flex-col md:flex-row overflow-hidden" id="home">
       {/* Left Section: Image (Photo) */}
@@ -23,7 +25,7 @@ const Hero: React.FC = () => {
             className="flex items-center gap-4"
           >
             <div className="w-3 h-3 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_#06B6D4]" />
-            <span className="text-sm font-bold uppercase tracking-widest">Available for projects</span>
+            <span className="text-sm font-bold uppercase tracking-widest">{t.hero.availableForProjects}</span>
           </motion.div>
         </div>
       </div>
@@ -37,7 +39,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-5xl sm:text-6xl md:text-9xl font-display font-extrabold leading-[0.9] tracking-tighter will-change-transform"
           >
-            EDITORIAL <br />
+            EDITING <br />
             & COLOR
           </motion.h1>
           <motion.p 
@@ -46,7 +48,7 @@ const Hero: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="mt-6 md:mt-8 text-gray-500 text-base sm:text-lg md:text-xl max-w-md leading-relaxed"
           >
-            Crafting premium visual narratives through a sophisticated creation pipeline from Production, editing to color grading all in one place
+            {t.hero.description}
           </motion.p>
         </div>
 
@@ -58,7 +60,7 @@ const Hero: React.FC = () => {
             transition={{ delay: 1.2, duration: 1, ease: "easeOut" }}
             className="text-[clamp(1.5rem,4.2vw,5vw)] font-display font-extrabold text-black uppercase whitespace-nowrap leading-none tracking-tighter"
           >
-            HNS EDITORIAL
+            HNS EDITING
           </motion.h2>
         </div>
       </div>

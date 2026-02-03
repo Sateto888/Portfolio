@@ -21,20 +21,20 @@ export const PROJECTS: Project[] = [
   {
     id: '2',
     number: '002',
-    title: 'Zhangjiejie National Park',
-    description: "Filmed in China's Zhangjiajie National Park, this project explores the concept of 'visual stillness.' The look is defined by a low-contrast grade and soft highlight roll-off, complemented by a slow-paced edit designed to immerse the viewer in a dreamlike look and feel.",
-    category: 'Look Development',
-    image: '/images/projects/zhangjiejie.jpg',
-    videoUrl: '/videos/zhangjiejie.mp4'
-  },
-  {
-    id: '3',
-    number: '003',
     title: 'Chengdu City',
     description: 'A deep dive into the urban fabric of Chengdu. Capturing the contrast between ancient traditions and modern metropolitan life.',
     category: 'Look Development',
     image: '/images/projects/chengdu.jpg',
     videoUrl: '/videos/chengdu travel.mp4'
+  },
+  {
+    id: '3',
+    number: '003',
+    title: 'Lijiang',
+    description: 'Exploring the ancient charm of Lijiang, where traditional Naxi culture meets timeless architecture in a visual journey through historic streets and mountain vistas.',
+    category: 'Look Development',
+    image: '/images/projects/lijiang.jpg',
+    videoUrl: '/videos/Lijiang travel.mp4'
   },
   {
     id: '4',
@@ -116,11 +116,6 @@ export const GALLERY_IMAGES = GALLERY_SESSIONS.flatMap(session => session.images
 
 export const SERVICES: Service[] = [
   {
-    id: 'photography',
-    title: 'Professional Production',
-    description: 'High-end captures for fashion, commercial, and editorial needs with an eye for detail and composition.'
-  },
-  {
     id: 'editing',
     title: 'Video Editing',
     description: 'Narrative-driven post-production for films, documentaries, and commercials, ensuring rhythm and impact.'
@@ -129,10 +124,5 @@ export const SERVICES: Service[] = [
     id: 'grading',
     title: 'Color Grading',
     description: 'Expert-level color correction and grading to achieve specific cinematic looks and technical perfection.'
-  },
-  {
-    id: 'creative',
-    title: 'Creative Direction',
-    description: 'Holistic project guidance from conceptualization to the final frame delivery.'
   }
 ];

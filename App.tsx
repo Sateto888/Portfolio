@@ -9,8 +9,10 @@ import GalleryView from './components/GalleryView';
 import Impressum from './components/Impressum';
 import { PROJECTS } from './constants';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
+  const { t } = useLanguage();
   const [view, setView] = useState<'main' | 'gallery' | 'impressum'>('main');
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
 
@@ -71,7 +73,7 @@ const App: React.FC = () => {
                 <div className="flex justify-between items-center mb-8 sm:mb-12 md:mb-16">
                   <div className="flex items-center gap-3 sm:gap-4">
                     <div className="w-2 h-2 bg-cyan-500 rounded-full flex-shrink-0" />
-                    <span className="text-sm sm:text-base md:text-[16px] font-bold uppercase tracking-widest text-gray-400">Selected Work</span>
+                    <span className="text-sm sm:text-base md:text-[16px] font-bold uppercase tracking-widest text-gray-400">{t.app.selectedWork}</span>
                   </div>
                   <span className="text-xs sm:text-sm font-bold text-gray-300 tracking-widest uppercase">2025</span>
                 </div>
@@ -96,7 +98,7 @@ const App: React.FC = () => {
                     whileInView={{ opacity: 1 }}
                     className="text-2xl md:text-4xl font-display font-medium leading-tight mb-8 sm:mb-10 md:mb-12 tracking-tight"
                   >
-                    "Existence is a series of moments; we <br /><span className="text-cyan-500 italic">curate them into a story</span>."
+                    "{t.app.quote} <br /><span className="text-cyan-500 italic">{t.app.quoteItalic}</span>."
                   </motion.h3>
                 </div>
               </section>

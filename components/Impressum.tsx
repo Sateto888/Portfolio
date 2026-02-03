@@ -29,7 +29,7 @@ const Impressum: React.FC<Props> = ({ onBack }) => {
           <div>
             <h2 className="text-2xl font-display font-bold mb-4">Angaben gemäß § 5 TMG</h2>
             <p className="text-lg leading-relaxed">
-              HNS Editorial<br />
+              HNS Editing<br />
               [Your Name]<br />
               [Your Address]<br />
               [City, Postal Code]<br />

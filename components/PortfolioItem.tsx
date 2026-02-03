@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Project } from '../types';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface Props {
   project: Project;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onToggle }) => {
+  const { t } = useLanguage();
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const [isBuffering, setIsBuffering] = useState(false);
   const [videoError, setVideoError] = useState(false);
@@ -249,14 +251,19 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onTog
           </span>
           <div className="flex-1">
             <h3 className="text-xl sm:text-2xl md:text-5xl font-display font-bold group-hover:translate-x-2 transition-transform duration-500 uppercase tracking-tighter">
-              {project.isGalleryLink ? 'GALLERY' : project.title}
+              {project.isGalleryLink ? t.portfolioItem.gallery : project.title}
             </h3>
-            <p className="text-gray-400 text-xs sm:text-sm md:text-base mt-1 sm:mt-2">{project.category === 'Look Development' ? 'Visual Study' : project.category}</p>
+            <p className="text-gray-400 text-xs sm:text-sm md:text-base mt-1 sm:mt-2">
+              {project.category === 'Look Development' ? t.categories.lookDevelopment : 
+               project.category === 'Videography' ? t.categories.videography :
+               project.category === 'Full Archive' ? t.categories.fullArchive :
+               project.category}
+            </p>
           </div>
         </div>
 
         <div className="mt-3 sm:mt-4 md:mt-0 flex items-center gap-3 sm:gap-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10 bg-white md:bg-transparent pr-2 sm:pr-4 py-2 md:py-0">
-          <span className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest">{project.isGalleryLink ? 'View All' : (isOpen ? 'Close' : 'Explore')}</span>
+          <span className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-widest">{project.isGalleryLink ? t.portfolioItem.viewAll : (isOpen ? t.portfolioItem.close : t.portfolioItem.explore)}</span>
           <motion.svg 
             animate={{ rotate: isOpen ? 90 : 0 }}
             width="32" height="32" viewBox="0 0 32 32" fill="none" className="fill-current text-cyan-500"
@@ -299,7 +306,7 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onTog
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-20">
                         <div className="flex flex-col items-center gap-4">
                           <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-                          <p className="text-gray-400 text-sm">Loading video...</p>
+                          <p className="text-gray-400 text-sm">{t.portfolioItem.loadingVideo}</p>
                         </div>
                       </div>
                     )}
@@ -309,7 +316,7 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onTog
                       <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
                         <div className="flex flex-col items-center gap-2">
                           <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-                          <p className="text-gray-300 text-xs">Buffering...</p>
+                          <p className="text-gray-300 text-xs">{t.portfolioItem.buffering}</p>
                         </div>
                       </div>
                     )}
@@ -318,8 +325,8 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onTog
                     {videoError && (
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
                         <div className="text-center text-gray-400">
-                          <p className="text-sm mb-2">Video unavailable</p>
-                          <p className="text-xs">Please check the file path</p>
+                          <p className="text-sm mb-2">{t.portfolioItem.videoUnavailable}</p>
+                          <p className="text-xs">{t.portfolioItem.checkFilePath}</p>
                         </div>
                       </div>
                     )}
@@ -349,7 +356,7 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onTog
                   </>
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
-                    <p className="text-gray-400 text-sm">No video available</p>
+                    <p className="text-gray-400 text-sm">{t.portfolioItem.noVideoAvailable}</p>
                   </div>
                 )}
               </div>
@@ -359,18 +366,27 @@ const PortfolioItem: React.FC<Props> = ({ project, onGalleryClick, isOpen, onTog
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <span className="text-xs font-bold uppercase tracking-widest text-cyan-500 block mb-4">Project Insights</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-cyan-500 block mb-4">{t.portfolioItem.projectInsights}</span>
                   <p className="text-lg md:text-xl font-display leading-relaxed text-gray-800">
-                    {project.description}
+                    {project.isGalleryLink ? t.projects.galleryDesc :
+                     project.title === 'Boxx Club' ? t.projects.boxxClubDesc :
+                     project.title === 'Chengdu City' ? t.projects.chengduDesc :
+                     project.title === 'Lijiang' ? t.projects.lijiangDesc :
+                     project.description}
                   </p>
                   <div className="mt-8 flex flex-col gap-2">
                     <div className="flex justify-between border-b border-gray-200 py-2 text-sm">
-                      <span className="text-gray-400">Production type</span>
-                      <span className="font-bold">{project.title === 'Boxx Club' ? 'Boxx Club' : 'Visual Study'}</span>
+                      <span className="text-gray-400">{t.portfolioItem.productionType}</span>
+                      <span className="font-bold">{project.title === 'Boxx Club' ? 'Boxx Club' : t.portfolioItem.visualStudy}</span>
                     </div>
                     <div className="flex justify-between border-b border-gray-200 py-2 text-sm">
-                      <span className="text-gray-400">Service</span>
-                      <span className="font-bold uppercase tracking-tighter">{project.category}</span>
+                      <span className="text-gray-400">{t.portfolioItem.service}</span>
+                      <span className="font-bold uppercase tracking-tighter">
+                        {project.category === 'Look Development' ? t.categories.lookDevelopment : 
+                         project.category === 'Videography' ? t.categories.videography :
+                         project.category === 'Full Archive' ? t.categories.fullArchive :
+                         project.category}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
