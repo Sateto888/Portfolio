@@ -8,7 +8,7 @@ interface Props {
 }
 
 const GalleryView: React.FC<Props> = ({ onBack }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -102,13 +102,13 @@ const GalleryView: React.FC<Props> = ({ onBack }) => {
           </h2>
         </div>
         <div className="flex flex-col max-w-xl text-gray-600 mt-6 sm:mt-8 md:mt-0 md:self-center">
-          <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] md:ml-0">
+          <div className={`text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] ${language === 'de' ? 'md:ml-0' : language === 'ko' ? 'md:ml-0' : 'md:ml-0'}`}>
             {t.galleryView.descriptionLine1}
           </div>
-          <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 md:ml-6">
+          <div className={`text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 ${language === 'de' ? 'md:ml-4' : language === 'ko' ? 'md:ml-0' : 'md:ml-6'}`}>
             {t.galleryView.descriptionLine2}
           </div>
-          <div className="text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 md:ml-12">
+          <div className={`text-base sm:text-lg md:text-[26px] leading-[1.1] tracking-[-0.01em] mt-1 md:mt-0.5 ${language === 'de' ? 'md:ml-8' : language === 'ko' ? 'md:ml-0' : 'md:ml-12'}`}>
             {t.galleryView.descriptionLine3}
           </div>
         </div>

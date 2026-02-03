@@ -99,7 +99,7 @@ export const translations = {
     // Hero
     hero: {
       availableForProjects: 'Verfügbar für Projekte',
-      description: 'Ihr Filmmaterial auf die nächste Stufe bringen durch narrativ-getriebenen Schnitt und einen durchdachten Look und Feel für das Bild'
+      description: 'Ihr Filmmaterial auf die nächste Stufe bringen durch narrativ-getriebenen Schnitt und einem durchdachten Look and Feel für ihre Vision'
     },
     // App
     app: {
@@ -110,7 +110,7 @@ export const translations = {
     // Services
     services: {
       title: 'Leistungen',
-      description: 'Visionen durch technische Präzision und kreative Meisterschaft in die Realität umsetzen.'
+      description: 'Visionen durch technische Präzision und Kreativität in die Realität umsetzen.'
     },
     // Footer
     footer: {
@@ -158,17 +158,17 @@ export const translations = {
     // Services list
     serviceList: {
       videoEditing: 'Videoschnitt',
-      videoEditingDesc: 'Narrativ-getriebene Postproduktion für Filme, Dokumentationen und Werbespots, die Rhythmus und Wirkung gewährleistet.',
+      videoEditingDesc: 'Narrativ-getriebene Postproduktion für Filme, Dokumentationen und Werbespots, die Wirkung gewährleistet.',
       colorGrading: 'Farbkorrektur',
-      colorGradingDesc: 'Expertenniveau bei Farbkorrektur und Grading, um spezifische filmische Looks und technische Perfektion zu erreichen.'
+      colorGradingDesc: 'Professionelle Farbkorrektur und Grading, auf ihre Vision und Ziel angepasst.'
     },
     // Projects
     projects: {
       gallery: 'Galerie',
       galleryDesc: 'Vollständige Fotografiesammlung ansehen.',
-      boxxClubDesc: "Einfangen des Pulses der südkoreanischen Nachtleben-Szene für Boxx Club. Dieses Projekt präsentiert eine umfassende Palette von Produktionsdienstleistungen, einschließlich Kinematografie, rhythmischem Schnitt und Farbkorrektur, entwickelt, um Engagement und Markenbewusstsein zu steigern.",
-      chengduDesc: 'Ein tiefer Einblick in das urbane Gefüge von Chengdu. Einfangen des Kontrasts zwischen alten Traditionen und modernem Großstadtleben.',
-      lijiangDesc: 'Erkundung des antiken Charmes von Lijiang, wo traditionelle Naxi-Kultur auf zeitlose Architektur trifft in einer visuellen Reise durch historische Straßen und Berglandschaften.'
+      boxxClubDesc: "Ein Ausschnitt aus dem Promo Material, welches für den Südkoreanischen Club The Boxx gefilmt und bearbeitet wurde.",
+      chengduDesc: 'Ein Reisefilm über die Stadt Chengdu in China, welcher mit seine Warmen Look und weichen highlights ein Nostalgisches feeling erwecken soll',
+      lijiangDesc: 'Ein Reisefilm über die Stadt Lijiang in China, welche bekannt für ihre Berglandschaften ist.'
     },
     // Marquee
     marquee: 'HNS EDITING • FARBKORREKTUR • NARRATIV • VISUELLE ERZÄHLUNG • POST PRODUCTION • PRODUKTION • SCHNITT • '
