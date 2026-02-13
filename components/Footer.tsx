@@ -110,8 +110,8 @@ const Footer: React.FC<Props> = ({ onNavigate, onOpenImpressum }) => {
             {t.footer.haveAnIdea} <br />
             <span className="text-cyan-500 italic">{t.footer.letsBringItToLife}</span>
           </h2>
-          <a href="mailto:hnseditorial@icloud.com" className="text-lg sm:text-xl md:text-4xl border-b-2 border-white/20 pb-2 hover:border-cyan-500 transition-colors duration-500 break-all md:break-normal">
-            hnseditorial@icloud.com
+          <a href="mailto:henrik.stenger@outlook.de" className="text-lg sm:text-xl md:text-4xl border-b-2 border-white/20 pb-2 hover:border-cyan-500 transition-colors duration-500 break-all md:break-normal">
+            henrik.stenger@outlook.de
           </a>
         </div>
 

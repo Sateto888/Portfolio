@@ -114,8 +114,8 @@ export const translations = {
     },
     // Footer
     footer: {
-      haveAnIdea: 'HABEN SIE EINE IDEE?',
-      letsBringItToLife: 'LASSEN SIE UNS SIE ZUM LEBEN ERWECKEN.',
+      haveAnIdea: 'Bringen wir Ihr Projekt zum Leben – live und in Farbe,',
+      letsBringItToLife: 'kontaktieren Sie mich.',
       navigation: 'Navigation',
       socials: 'Socials',
       location: 'Standort',

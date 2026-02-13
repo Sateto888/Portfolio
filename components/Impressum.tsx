@@ -40,7 +40,7 @@ const Impressum: React.FC<Props> = ({ onBack }) => {
           <div>
             <h2 className="text-2xl font-display font-bold mb-4">Kontakt</h2>
             <p className="text-lg leading-relaxed">
-              E-Mail: <a href="mailto:hnseditorial@icloud.com" className="text-cyan-500 hover:underline">hnseditorial@icloud.com</a>
+              E-Mail: <a href="mailto:henrik.stenger@outlook.de" className="text-cyan-500 hover:underline">henrik.stenger@outlook.de</a>
             </p>
           </div>
 
