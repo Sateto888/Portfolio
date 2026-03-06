@@ -84,6 +84,13 @@ export const translations = {
       chengduDesc: 'A deep dive into the urban fabric of Chengdu. Capturing the contrast between ancient traditions and modern metropolitan life.',
       lijiangDesc: 'Exploring the ancient charm of Lijiang, where traditional Naxi culture meets timeless architecture in a visual journey through historic streets and mountain vistas.'
     },
+    // Color Grading Section
+    colorGradingSection: {
+      label: 'Color Grading',
+      heading: 'Your Footage,',
+      headingAccent: 'Its Trademark Look.',
+      body: 'Whether it is basic adjustments or a dedicated look fitted for your vision — with our service your footage gets its trademark look fitting your message.'
+    },
     // Marquee
     marquee: 'HNS EDITING • COLOR GRADING • NARRATIVE • VISUAL STORYTELLING • POST PRODUCTION • PRODUCTION • EDITING • '
   },
@@ -170,6 +177,13 @@ export const translations = {
       chengduDesc: 'Ein Reisefilm über die Stadt Chengdu in China, welcher mit seine Warmen Look und weichen highlights ein Nostalgisches feeling erwecken soll',
       lijiangDesc: 'Ein Reisefilm über die Stadt Lijiang in China, welche bekannt für ihre Berglandschaften ist.'
     },
+    // Color Grading Section
+    colorGradingSection: {
+      label: 'Farbkorrektur',
+      heading: 'Ihr Filmmaterial,',
+      headingAccent: 'Sein unverwechselbarer Look.',
+      body: 'Ob einfache Korrekturen oder ein maßgeschneiderter Look für Ihre Vision – mit unserem Service erhält Ihr Filmmaterial den Look, der zur Ihrer Marke passt.'
+    },
     // Marquee
     marquee: 'HNS EDITING • FARBKORREKTUR • NARRATIV • VISUELLE ERZÄHLUNG • POST PRODUCTION • PRODUKTION • SCHNITT • '
   },
@@ -255,6 +269,13 @@ export const translations = {
       boxxClubDesc: '박스 클럽을 위한 대한민국 나이트라이프의 펄스를 포착합니다. 이 프로젝트는 시네마토그래피, 리듬감 있는 편집, 컬러 보정을 포함한 포괄적인 제작 서비스를 선보이며 참여도와 브랜드 인지도를 높이도록 설계되었습니다.',
       chengduDesc: '청두의 도시 구조에 대한 깊은 탐구. 고대 전통과 현대 대도시 생활 사이의 대비를 포착합니다.',
       lijiangDesc: '리장의 고대적 매력을 탐구하며, 전통적인 나시 문화가 시공을 초월한 건축과 만나는 역사적인 거리와 산악 경관을 통한 비주얼 여정.'
+    },
+    // Color Grading Section
+    colorGradingSection: {
+      label: '컬러 그레이딩',
+      heading: '당신의 영상,',
+      headingAccent: '그 고유한 룩.',
+      body: '기본 보정부터 비전에 맞춘 전용 룩까지 — 저희 서비스로 당신의 영상은 메시지에 어울리는 트레이드마크 룩을 갖추게 됩니다.'
     },
     // Marquee
     marquee: 'HNS EDITING • 컬러 그레이딩 • 내러티브 • 비주얼 스토리텔링 • 포스트 프로덕션 • 프로덕션 • 편집 • '
