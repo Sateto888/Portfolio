@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { getNetlifyImageUrl } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const directHeroImagePath = '/images/hero/HeroProfile.jpg';
+  const netlifyHeroImageUrl = useMemo(() => getNetlifyImageUrl(directHeroImagePath, 1200, 80), []);
+  const [heroImageSrc, setHeroImageSrc] = useState(netlifyHeroImageUrl);
+
+  const handleHeroImageError = () => {
+    // Fallback for hosts where Netlify Image CDN endpoint is unavailable.
+    if (heroImageSrc !== directHeroImagePath) {
+      setHeroImageSrc(directHeroImagePath);
+    }
+  };
+
   return (
     <section className="relative h-screen w-full flex flex-col md:flex-row overflow-hidden" id="home">
       {/* Left Section: Image (Photo) */}
@@ -13,7 +24,8 @@ const Hero: React.FC = () => {
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          src={getNetlifyImageUrl("/images/hero/HeroProfile.jpg", 1200, 80)} 
+          src={heroImageSrc}
+          onError={handleHeroImageError}
           className="absolute inset-0 w-full h-full object-cover grayscale brightness-75 will-change-transform"
           alt="Featured work"
         />

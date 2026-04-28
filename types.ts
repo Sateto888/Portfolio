@@ -8,6 +8,7 @@ export interface Project {
   category: 'Color Grading' | 'Photography' | 'Editing' | 'Full Archive' | 'Videography' | 'Look Development';
   image: string;
   videoUrl?: string;
+  photoImages?: string[];
   isGalleryLink?: boolean;
 }
 

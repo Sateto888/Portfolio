@@ -80,6 +80,9 @@ export const translations = {
     projects: {
       gallery: 'Gallery',
       galleryDesc: 'View the full photography collection.',
+      ultrace2026Desc: 'Ultrace is an event showcasing only the finest cars in the scene. From slammed classics to immaculate widebody builds, these shots document the passion and craftsmanship that go into these cars.',
+      maternaInterviewDesc: 'An interview between Materna Senior Vice President Dr. Christian Samulewicz and consultant Christian Knerr about the future of marketing and sales, whose oversight, production, and editing I handled.',
+      turnhallePeterscarsDesc: 'A marketing collaboration between Premium Cars Peters and the fitness lounge Turnhalle in Dortmund. The marketing photo material was shot and edited by me.',
       boxxClubDesc: "Capturing the pulse of South Korea's nightlife for Boxx Club. This project showcases a comprehensive suite of production services, including cinematography, rhythmic editing, and color correction, designed to drive engagement and brand awareness.",
       chengduDesc: 'A deep dive into the urban fabric of Chengdu. Capturing the contrast between ancient traditions and modern metropolitan life.',
       lijiangDesc: 'Exploring the ancient charm of Lijiang, where traditional Naxi culture meets timeless architecture in a visual journey through historic streets and mountain vistas.'
@@ -173,6 +176,9 @@ export const translations = {
     projects: {
       gallery: 'Galerie',
       galleryDesc: 'Vollständige Fotografiesammlung ansehen.',
+      ultrace2026Desc: 'Ultrace ist ein Event, das Supercars und kulturelle Klassiker an einem Ort vereint. Diese Bilder wurden während der Messe in Düsseldorf aufgenommen und zeigen die Leidenschaft und Präzision, die im Bau jedes Wagens steckt.',
+      maternaInterviewDesc: 'Ein Interview zwischen dem Senior Vice President Dr. Christian Samulewicz von Materna und dem Consultant Christian Knerr über die Zukunft von Marketing und Sales, dessen Produktion und Editierung ich übernommen habe.',
+      turnhallePeterscarsDesc: 'Eine Kollaboration zwischen Premium Cars Peters und der Fitnesslounge Turnhalle in Dortmund. Das Bildmaterial für die Werbekampagne wurde von mir aufgenommen und bearbeitet.',
       boxxClubDesc: "Ein Ausschnitt aus dem Promo Material, welches für den Südkoreanischen Club The Boxx gefilmt und bearbeitet wurde.",
       chengduDesc: 'Ein Reisefilm über die Stadt Chengdu in China, welcher mit seine Warmen Look und weichen highlights ein Nostalgisches feeling erwecken soll',
       lijiangDesc: 'Ein Reisefilm über die Stadt Lijiang in China, welche bekannt für ihre Berglandschaften ist.'
@@ -266,6 +272,9 @@ export const translations = {
     projects: {
       gallery: '갤러리',
       galleryDesc: '전체 사진 컬렉션을 확인하세요.',
+      ultrace2026Desc: 'Ultrace is an event showcasing only the finest cars in the scene. From slammed classics to immaculate widebody builds, these shots document the passion and craftsmanship that go into these cars.',
+      maternaInterviewDesc: 'An interview between Materna Senior Vice President Dr. Christian Samulewicz and consultant Christian Knerr about the future of marketing and sales, whose oversight, production, and editing I handled.',
+      turnhallePeterscarsDesc: 'A marketing collaboration between Premium Cars Peters and the fitness lounge Turnhalle in Dortmund. The marketing photo material was shot and edited by me.',
       boxxClubDesc: '박스 클럽을 위한 대한민국 나이트라이프의 펄스를 포착합니다. 이 프로젝트는 시네마토그래피, 리듬감 있는 편집, 컬러 보정을 포함한 포괄적인 제작 서비스를 선보이며 참여도와 브랜드 인지도를 높이도록 설계되었습니다.',
       chengduDesc: '청두의 도시 구조에 대한 깊은 탐구. 고대 전통과 현대 대도시 생활 사이의 대비를 포착합니다.',
       lijiangDesc: '리장의 고대적 매력을 탐구하며, 전통적인 나시 문화가 시공을 초월한 건축과 만나는 역사적인 거리와 산악 경관을 통한 비주얼 여정.'

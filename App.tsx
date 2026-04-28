@@ -6,6 +6,7 @@ import Services from './components/Services';
 import Footer from './components/Footer';
 import Marquee from './components/Marquee';
 import GalleryView from './components/GalleryView';
+import ProjectGalleryView from './components/ProjectGalleryView';
 import Impressum from './components/Impressum';
 import { PROJECTS } from './constants';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,8 +14,9 @@ import { useLanguage } from './contexts/LanguageContext';
 
 const App: React.FC = () => {
   const { t } = useLanguage();
-  const [view, setView] = useState<'main' | 'gallery' | 'impressum'>('main');
+  const [view, setView] = useState<'main' | 'gallery' | 'projectGallery' | 'impressum'>('main');
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
+  const [activeProjectGalleryId, setActiveProjectGalleryId] = useState<string | null>(null);
 
   const handleProjectToggle = useCallback((projectId: string) => {
     setOpenProjectId(prevId => prevId === projectId ? null : projectId);
@@ -47,10 +49,18 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  const openProjectGallery = (projectId: string) => {
+    setActiveProjectGalleryId(projectId);
+    setView('projectGallery');
+    window.scrollTo(0, 0);
+  };
+
   const openImpressum = () => {
     setView('impressum');
     window.scrollTo(0, 0);
   };
+
+  const activeProject = PROJECTS.find((project) => project.id === activeProjectGalleryId);
 
   return (
     <div className="min-h-screen bg-[#FCFCFC]">
@@ -85,7 +95,7 @@ const App: React.FC = () => {
                     transition={{ duration: 0.7, ease: 'easeOut' }}
                   >
                     <video
-                      src="/videos/Wipe Animation 2.mp4"
+                      src="/videos/Wipe%20Animation%202.mp4"
                       autoPlay
                       loop
                       muted
@@ -128,6 +138,7 @@ const App: React.FC = () => {
                       key={project.id} 
                       project={project} 
                       onGalleryClick={openGallery}
+                      onProjectGalleryClick={openProjectGallery}
                       isOpen={openProjectId === project.id}
                       onToggle={handleProjectToggle}
                     />
@@ -153,6 +164,10 @@ const App: React.FC = () => {
           </motion.div>
         ) : view === 'gallery' ? (
           <GalleryView key="gallery" onBack={() => navigateTo('portfolio')} />
+        ) : view === 'projectGallery' ? (
+          activeProject ? (
+            <ProjectGalleryView key={activeProject.id} project={activeProject} onBack={() => navigateTo('portfolio')} />
+          ) : null
         ) : (
           <Impressum key="impressum" onBack={() => navigateTo('home')} />
         )}
