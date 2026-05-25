@@ -51,8 +51,8 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-5xl sm:text-6xl md:text-9xl font-display font-extrabold leading-[0.9] tracking-tighter will-change-transform"
           >
-            EDITING <br />
-            & COLOR
+            {t.hero.titleLine1} <br />
+            {t.hero.titleLine2}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}

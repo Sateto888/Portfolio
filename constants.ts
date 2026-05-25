@@ -281,6 +281,16 @@ export const GALLERY_IMAGES = GALLERY_SESSIONS.flatMap(session => session.images
 
 export const SERVICES: Service[] = [
   {
+    id: 'photography',
+    title: 'Photography',
+    description: 'High-end still imagery for fashion, commercial, and editorial projects with careful attention to composition and detail.'
+  },
+  {
+    id: 'videography',
+    title: 'Videography',
+    description: 'Cinematic filming for campaigns, events, and branded content from concept through capture.'
+  },
+  {
     id: 'editing',
     title: 'Video Editing',
     description: 'Narrative-driven post-production for films, documentaries, and commercials, ensuring rhythm and impact.'

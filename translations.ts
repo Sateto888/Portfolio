@@ -12,6 +12,8 @@ export const translations = {
     },
     // Hero
     hero: {
+      titleLine1: 'VIDEO AND',
+      titleLine2: 'PHOTOGRAPHY',
       availableForProjects: 'Available for projects',
       description: 'Bringing your footage to the next level through narrative driven editing and a crafted look and feel for the image'
     },
@@ -71,6 +73,10 @@ export const translations = {
     },
     // Services list
     serviceList: {
+      photography: 'Photography',
+      photographyDesc: 'High-end still imagery for fashion, commercial, and editorial projects with careful attention to composition and detail.',
+      videography: 'Videography',
+      videographyDesc: 'Cinematic filming for campaigns, events, and branded content from concept through capture.',
       videoEditing: 'Video Editing',
       videoEditingDesc: 'Narrative-driven post-production for films, documentaries, and commercials, ensuring rhythm and impact.',
       colorGrading: 'Color Grading',
@@ -108,6 +114,8 @@ export const translations = {
     },
     // Hero
     hero: {
+      titleLine1: 'VIDEO UND',
+      titleLine2: 'FOTOGRAFIE',
       availableForProjects: 'Verfügbar für Projekte',
       description: 'Ihr Filmmaterial auf die nächste Stufe bringen durch narrativ-getriebenen Schnitt und einem durchdachten Look and Feel für ihre Vision'
     },
@@ -167,6 +175,10 @@ export const translations = {
     },
     // Services list
     serviceList: {
+      photography: 'Fotografie',
+      photographyDesc: 'Hochwertige Standbilder für Mode, Werbung und Editorial mit besonderem Augenmerk auf Komposition und Detail.',
+      videography: 'Videografie',
+      videographyDesc: 'Filmische Aufnahmen für Kampagnen, Events und Markencontent von der Konzeption bis zur Aufnahme.',
       videoEditing: 'Videoschnitt',
       videoEditingDesc: 'Narrativ-getriebene Postproduktion für Filme, Dokumentationen und Werbespots, die Wirkung gewährleistet.',
       colorGrading: 'Farbkorrektur',
@@ -204,6 +216,8 @@ export const translations = {
     },
     // Hero
     hero: {
+      titleLine1: '영상 및',
+      titleLine2: '사진',
       availableForProjects: '프로젝트 가능',
       description: '내러티브 중심의 편집과 이미지를 위한 정교한 룩앤필을 통해 당신의 영상 푸티지를 다음 단계로 끌어올립니다'
     },
@@ -263,6 +277,10 @@ export const translations = {
     },
     // Services list
     serviceList: {
+      photography: '사진',
+      photographyDesc: '패션, 상업, 에디토리얼 프로젝트를 위한 고품질 스틸 이미지로 구도와 디테일에 세심한 주의를 기울입니다.',
+      videography: '비디오그래피',
+      videographyDesc: '캠페인, 이벤트, 브랜드 콘텐츠를 위한 시네마틱 촬영을 기획부터 촬영까지 제공합니다.',
       videoEditing: '비디오 편집',
       videoEditingDesc: '영화, 다큐멘터리, 광고를 위한 내러티브 중심의 포스트 프로덕션으로 리듬과 임팩트를 보장합니다.',
       colorGrading: '컬러 그레이딩',

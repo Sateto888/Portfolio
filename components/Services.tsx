@@ -21,6 +21,8 @@ const Services: React.FC = () => {
         {SERVICES.map((service, index) => {
           const getServiceTitle = () => {
             switch(service.id) {
+              case 'photography': return t.serviceList.photography;
+              case 'videography': return t.serviceList.videography;
               case 'editing': return t.serviceList.videoEditing;
               case 'grading': return t.serviceList.colorGrading;
               default: return service.title;
@@ -28,6 +30,8 @@ const Services: React.FC = () => {
           };
           const getServiceDescription = () => {
             switch(service.id) {
+              case 'photography': return t.serviceList.photographyDesc;
+              case 'videography': return t.serviceList.videographyDesc;
               case 'editing': return t.serviceList.videoEditingDesc;
               case 'grading': return t.serviceList.colorGradingDesc;
               default: return service.description;
